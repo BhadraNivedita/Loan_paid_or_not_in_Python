@@ -1,14 +1,7 @@
 
 # coding: utf-8
 
-# <a href="https://www.bigdatauniversity.com"><img src = "https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png" width = 400, align = "center"></a>
-# 
-# <h1 align=center><font size = 5> Classification with Python</font></h1>
-
-# In this notebook we try to practice all the classification algorithms that we learned in this course.
-# 
-# We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.
-# 
+ 
 # Lets first load required libraries:
 
 # In[1]:
@@ -254,7 +247,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 from sklearn.metrics import f1_score
-from sklearn.metrics import jaccard_similarity_score
 
 
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=4)
@@ -266,19 +258,15 @@ yhat = neigh.predict(X_test)
 
 print("KNN's Accuracy: ", metrics.accuracy_score(y_test, yhat))
 print("F1 score:", f1_score(y_test, yhat, average='weighted')) 
-print("Jaccard similarity score: ", jaccard_similarity_score(y_test, yhat))
 
 
 # # Decision Tree
 
-# In[24]:
 
 
 from sklearn.tree import DecisionTreeClassifier
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.2, random_state=4)
 
-
-# In[25]:
 
 
 loadTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4).fit(X_train,y_train)
@@ -287,12 +275,9 @@ predTree = loadTree.predict(X_test)
 
 print("DecisionTrees's Accuracy: ", metrics.accuracy_score(y_test, predTree))
 print("F1 score:", f1_score(y_test, yhat, average='weighted')) 
-print("Jaccard similarity score: ", jaccard_similarity_score(y_test, yhat))
 
 
 # # Support Vector Machine
-
-# In[26]:
 
 
 from sklearn import svm
@@ -305,12 +290,10 @@ clf = svm.SVC(kernel='rbf').fit(X_train, y_train)
 yhat = clf.predict(X_test)
 
 print("F1 score:", f1_score(y_test, yhat, average='weighted')) 
-print("Jaccard similarity score: ", jaccard_similarity_score(y_test, yhat))
 
 
 # # Logistic Regression
 
-# In[28]:
 
 
 from sklearn.linear_model import LogisticRegression
@@ -321,10 +304,7 @@ LR = LogisticRegression(C=0.01, solver='liblinear').fit(X_train,y_train)
 yhat = LR.predict(X_test)
 
 print("F1 score:", f1_score(y_test, yhat, average='weighted')) 
-print('Jaccard similarity score:',jaccard_similarity_score(y_test, yhat))
 
-
-# In[29]:
 
 
 yhat_prob = LR.predict_proba(X_test)
@@ -334,10 +314,6 @@ print('Log Loss:',log_loss(y_test, yhat_prob))
 # # Model Evaluation using Test set
 
 # First, download and load the test set:
-
-# In[30]:
-
-
 get_ipython().system(u'wget -O loan_test.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv')
 
 
